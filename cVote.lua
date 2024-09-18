@@ -32,7 +32,7 @@ end
 --all paralell functions above
 
 local function receive()
-    while Received = false do
+    while Received == false do
         parallel.waitForAny(receiveVote,loadVote)
     end
 end
