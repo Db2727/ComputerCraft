@@ -74,6 +74,16 @@ end
 function ReadVote()
     local ans = io.read()
     rednet.broadcast(ans,VProt)
+    ReceiveAns()
+end
+
+function ReceiveAns()
+    print("Waiting for Results")
+    local id,win = rednet.receive(AProt)
+    local id,ans = rednet.receive(AProt)
+    Clr()
+    print(win.. " | won with " ..ans.. " Votes!")
+    
 end
 
 Receive()
