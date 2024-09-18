@@ -29,7 +29,7 @@ local function ReadVote()
     rednet.broadcast(question,VProt)
     
     for index, value in ipairs(VList) do
-        rednet.broadcast("test",VProt)
+        rednet.broadcast(value,VProt)
         sleep(0.1)
     end
     rednet.broadcast("stop", VProt)
