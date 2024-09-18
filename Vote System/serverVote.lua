@@ -2,14 +2,16 @@ VProt = "vote"
 AProt = "answer"
 VList = {}
 
+rednet.open("back")
 
 
-local function clr()
+function Clr()
     term.clear()
 end
 
-local function readVote()
+local function ReadVote()
     local question = io.read()
+    print()
     local stop = false
     
     while not stop do
@@ -25,9 +27,10 @@ local function readVote()
     end
     
     rednet.broadcast(question,VProt)
+    sleep(1)
     rednet.broadcast(VList,VProt)
 
 end
 
 
-readVote()        
+ReadVote()        

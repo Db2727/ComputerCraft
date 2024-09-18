@@ -1,6 +1,6 @@
 {
     "Lua.diagnostics.disable": [
         "unused-function",
-        "undefined-global"
+        "undefined-global",
     ]
 }
