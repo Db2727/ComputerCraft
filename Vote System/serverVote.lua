@@ -1,7 +1,7 @@
 VOTE_PROTOCOL = "vote"
 ANSWER_PROTOCOL = "answer"
 VoteList = {}
-AnsList = {}
+AnswerList = {}
 Time = 20
 
 rednet.open("back")
@@ -51,7 +51,7 @@ function PrlReceive()
     local i = 1
     while true do
         local id,ans = rednet.receive(VOTE_PROTOCOL)
-        AnsList[i] = tonumber(ans)
+        AnswerList[i] = tonumber(ans)
         i = i + 1
     end
 end
@@ -63,7 +63,7 @@ function ReceiveVote()
 end
 
 function CountVote()
-   local ans,ans2,ind,ind2 = CountNumbersInList(AnsList)
+   local ans,ans2,ind,ind2 = CountNumbersInList(AnswerList)
 
    if ans == ans2 then
         -- do something
@@ -83,7 +83,7 @@ function CountNumbersInList(list)
     local ind = 0
     local ind2 = 0
 
-    for i,v in ipairs(AnsList) do
+    for i,v in ipairs(AnswerList) do
         num[v] = num[v] + 1
     end
 
