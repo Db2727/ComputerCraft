@@ -44,25 +44,22 @@ function ReceiveVote()
     end
     
     Clr()
-    print(VList[1])
+    print(msgList[1])
     Received = true
+    PrintVote()
 end
 
 --all parallel functions above
 
 function Receive()
-    while Received == false do
-        parallel.waitForAny(ReceiveVote,LoadVote)
-    end
-    PrintVote()
+    ReceiveVote()
+    
 end
 
 function PrintVote()
     print(Vtxt)
     print()
-    for i,v in ipairs(VList) do
-        print(i.. ". " ..v)
-    end
+    
 end
 
 Receive()
