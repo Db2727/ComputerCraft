@@ -1,11 +1,11 @@
-VProt = "vote"
-AProt = "answer"
-VList = {}
-VTxt = ""
-TxtReceived = false
+VOTE_PROTOCOL = "vote"
+ANSWER_PROTOCOL = "answer"
+VoteList = {}
+VoteText = ""
+TextReceived = false
 ListReceived = false
 Received = false
-It = 1
+Iterator = 1
 
 rednet.open("back")
 
@@ -29,16 +29,16 @@ end
 function ReceiveVote()
 
     local msgList = {}
-    id, VTxt = rednet.receive(VProt)
+    id, VoteText = rednet.receive(VOTE_PROTOCOL)
         
     
     while ListReceived == false do
-        local id, msg = rednet.receive(VProt)
+        local id, msg = rednet.receive(VOTE_PROTOCOL)
         if msg ~= "stop" then
-            msgList[It] = msg
-            It = It + 1
+            msgList[Iterator] = msg
+            Iterator = Iterator + 1
         elseif msg == "stop" then
-            VList = msgList
+            VoteList = msgList
             ListReceived = true
             Received = true
         end
@@ -62,9 +62,9 @@ end
 
 function PrintVote()
     
-    print(VTxt)
+    print(VoteText)
     print()
-    for i,v in ipairs(VList) do
+    for i,v in ipairs(VoteList) do
         print(i.. ". " ..v)
     end
     ReadVote()
@@ -73,14 +73,14 @@ end
 
 function ReadVote()
     local ans = io.read()
-    rednet.broadcast(ans,VProt)
+    rednet.broadcast(ans,VOTE_PROTOCOL)
     ReceiveAns()
 end
 
 function ReceiveAns()
     print("Waiting for Results")
-    local id,win = rednet.receive(AProt)
-    local id,ans = rednet.receive(AProt)
+    local id,win = rednet.receive(ANSWER_PROTOCOL)
+    local id,ans = rednet.receive(ANSWER_PROTOCOL)
     Clr()
     print(win.. " has won with " ..ans.. " Votes!")
     

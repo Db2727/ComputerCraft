@@ -1,6 +1,6 @@
-VProt = "vote"
-AProt = "answer"
-VList = {}
+VOTE_PROTOCOL = "vote"
+ANSWER_PROTOCOL = "answer"
+VoteList = {}
 AnsList = {}
 Time = 20
 
@@ -21,21 +21,21 @@ function ReadVote()
         local inp = io.read()
         
         if inp ~= "stop" then
-            VList[i] = inp
+            VoteList[i] = inp
             i = i+1
         else
             stop = true
         end
     end
     
-    print(VList[1])
-    rednet.broadcast(question,VProt)
+    print(VoteList[1])
+    rednet.broadcast(question,VOTE_PROTOCOL)
     
-    for index, value in ipairs(VList) do
-        rednet.broadcast(value,VProt)
+    for index, value in ipairs(VoteList) do
+        rednet.broadcast(value,VOTE_PROTOCOL)
         sleep(0.1)
     end
-    rednet.broadcast("stop", VProt)
+    rednet.broadcast("stop", VOTE_PROTOCOL)
     ReceiveVote()
 end
 
@@ -50,7 +50,7 @@ end
 function PrlReceive()
     local i = 1
     while true do
-        local id,ans = rednet.receive(VProt)
+        local id,ans = rednet.receive(VOTE_PROTOCOL)
         AnsList[i] = tonumber(ans)
         i = i + 1
     end
@@ -68,9 +68,9 @@ function CountVote()
    if ans == ans2 then
         -- do sth
    else
-        local win = VList[ind]
-        rednet.broadcast(win,AProt)
-        rednet.broadcast(ans,AProt)
+        local win = VoteList[ind]
+        rednet.broadcast(win,ANSWER_PROTOCOL)
+        rednet.broadcast(ans,ANSWER_PROTOCOL)
         print(win.. " has won with " ..ans.. " Votes!")
    end
 end
