@@ -66,7 +66,7 @@ function CountVote()
    local ans,ans2,ind,ind2 = CountNumbersInList(AnsList)
 
    if ans == ans2 then
-        -- do sth
+        -- do something
    else
         local win = VoteList[ind]
         rednet.broadcast(win,ANSWER_PROTOCOL)
