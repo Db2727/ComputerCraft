@@ -41,7 +41,7 @@ end
 
 function Countdown()
     for i=1,Time do
-        print(i)
+        print(Time - i)
         sleep(1)
         
     end
@@ -71,7 +71,7 @@ function CountVote()
         local win = VList[ind]
         rednet.broadcast(win,AProt)
         rednet.broadcast(ans,AProt)
-        print(win.. " | won with " ..ans.. " Votes!")
+        print(win.. " has won with " ..ans.. " Votes!")
    end
 end
 

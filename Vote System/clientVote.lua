@@ -82,7 +82,7 @@ function ReceiveAns()
     local id,win = rednet.receive(AProt)
     local id,ans = rednet.receive(AProt)
     Clr()
-    print(win.. " | won with " ..ans.. " Votes!")
+    print(win.. " has won with " ..ans.. " Votes!")
     
 end
 
