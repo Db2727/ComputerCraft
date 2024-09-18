@@ -26,9 +26,21 @@ function LoadVote()
 end
 
 function ReceiveVote()
-    id, Vtxt = rednet.receive(VProt)
-    id, VList = rednet.receive(VProt)
+    if TxtReceived == false then
+        id, Vtxt = rednet.receive(VProt)
+        TxtReceived = true
+    end
 
+    local it = 1
+    while ListReceived == false do
+        local id, msg = rednet.receive(VProt)
+        if msg ~= "stop" then
+            VList[it] = msg
+            it = it + 1
+        else
+            ListReceived = true
+        end
+    end
     
     Clr()
     print(VList[1])
