@@ -67,6 +67,13 @@ function PrintVote()
     for i,v in ipairs(VList) do
         print(i.. ". " ..v)
     end
+    ReadVote()
+end
+
+
+function ReadVote()
+    local ans = io.read()
+    rednet.broadcast(ans,VProt)
 end
 
 Receive()

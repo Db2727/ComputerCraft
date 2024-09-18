@@ -1,6 +1,8 @@
 VProt = "vote"
 AProt = "answer"
 VList = {}
+AnsList = {}
+Time = 20
 
 rednet.open("back")
 
@@ -9,7 +11,7 @@ function Clr()
     term.clear()
 end
 
-local function ReadVote()
+function ReadVote()
     local question = io.read()
     print()
     local stop = false
@@ -36,5 +38,30 @@ local function ReadVote()
     rednet.broadcast("stop", VProt)
 end
 
+function Countdown()
+    for i=1,Time do
+        print(Time)
+        sleep(1)
+    end
+end
+
+function PrlReceive()
+    local i = 1
+    while true do
+        local id,ans = rednet.receive(VProt)
+        AnsList[i] = ans
+        i = i + 1
+    end
+end
+
+
+function ReceiveVote()
+    parallel.waitForAny(PrlReceive,Countdown)
+    CountVote()
+end
+
+function CountVote()
+    
+end
 
 ReadVote()        
