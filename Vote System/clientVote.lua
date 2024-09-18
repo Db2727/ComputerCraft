@@ -30,14 +30,15 @@ function ReceiveVote()
         id, Vtxt = rednet.receive(VProt)
         TxtReceived = true
     end
-
+    local msgList = {}
     local it = 1
     while ListReceived == false do
         local id, msg = rednet.receive(VProt)
         if msg ~= "stop" then
-            VList[it] = msg
+            msgList[it] = msg
             it = it + 1
         else
+            VList = msgList
             ListReceived = true
         end
     end
