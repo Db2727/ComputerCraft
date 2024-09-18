@@ -13,9 +13,9 @@ local function ReadVote()
     local question = io.read()
     print()
     local stop = false
-    
+    local i = 1
     while not stop do
-        local i = 0
+        
         local inp = io.read()
         
         if inp ~= "stop" then
@@ -26,6 +26,7 @@ local function ReadVote()
         end
     end
     
+    print(VList[1])
     rednet.broadcast(question,VProt)
     
     for index, value in ipairs(VList) do

@@ -5,6 +5,7 @@ VTxt = ""
 TxtReceived = false
 ListReceived = false
 Received = false
+It = 1
 
 rednet.open("back")
 
@@ -26,26 +27,23 @@ function LoadVote()
 end
 
 function ReceiveVote()
-    if TxtReceived == false then
-        id, Vtxt = rednet.receive(VProt)
-        TxtReceived = true
-    end
+
     local msgList = {}
-    local it = 1
+    id, VTxt = rednet.receive(VProt)
+        
+    
     while ListReceived == false do
         local id, msg = rednet.receive(VProt)
         if msg ~= "stop" then
-            msgList[it] = msg
-            it = it + 1
-        else
+            msgList[It] = msg
+            It = It + 1
+        elseif msg == "stop" then
             VList = msgList
             ListReceived = true
+            Received = true
         end
     end
-    
     Clr()
-    print(VList[1])
-    Received = true
 end
 
 --all parallel functions above
@@ -54,11 +52,17 @@ function Receive()
     while Received == false do
         parallel.waitForAny(ReceiveVote,LoadVote)
     end
-    PrintVote()
+    if Received == true then
+        PrintVote()
+    else
+        Receive()
+    end
+    
 end
 
 function PrintVote()
-    print(Vtxt)
+    
+    print(VTxt)
     print()
     for i,v in ipairs(VList) do
         print(i.. ". " ..v)
