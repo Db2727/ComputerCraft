@@ -1,3 +1,4 @@
+--Hallo
 VOTE_PROTOCOL = "vote"
 ANSWER_PROTOCOL = "answer"
 VoteList = {}
