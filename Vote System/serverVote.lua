@@ -29,6 +29,8 @@ function ReadVote()
     end
     
     print(VoteList[1])
+    rednet.broadcast("start",VOTE_PROTOCOL)
+    sleep(1)
     rednet.broadcast(question,VOTE_PROTOCOL)
     
     for index, value in ipairs(VoteList) do
@@ -66,7 +68,11 @@ function CountVote()
    local ans,ans2,ind,ind2 = CountNumbersInList(AnswerList)
 
    if ans == ans2 then
-        -- do something
+        --stupid please change
+        local win = VoteList[ind]
+        rednet.broadcast(win,ANSWER_PROTOCOL)
+        rednet.broadcast(ans,ANSWER_PROTOCOL)
+        print(win.. " has won with " ..ans.. " Votes!")
    else
         local win = VoteList[ind]
         rednet.broadcast(win,ANSWER_PROTOCOL)

@@ -26,6 +26,13 @@ function LoadVote()
     end
 end
 
+function waitForStart()
+    local id,msg = rednet.receive(VOTE_PROTOCOL)
+    if msg == "start" then
+        Received = true
+    end
+end
+
 function ReceiveVote()
 
     local msgList = {}
@@ -40,20 +47,20 @@ function ReceiveVote()
         elseif msg == "stop" then
             VoteList = msgList
             ListReceived = true
-            Received = true
+            Clr()
+            PrintVote()
         end
     end
-    Clr()
 end
 
 --all parallel functions above
 
 function Receive()
     while Received == false do
-        parallel.waitForAny(ReceiveVote,LoadVote)
+        parallel.waitForAny(waitForStart,LoadVote)
     end
     if Received == true then
-        PrintVote()
+        ReceiveVote()
     else
         Receive()
     end
@@ -78,6 +85,7 @@ function ReadVote()
 end
 
 function ReceiveAns()
+    Clr()
     print("Waiting for Results")
     local id,win = rednet.receive(ANSWER_PROTOCOL)
     local id,ans = rednet.receive(ANSWER_PROTOCOL)
