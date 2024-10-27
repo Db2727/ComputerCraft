@@ -2,31 +2,31 @@ WWAS_AUDIO_PROTOCOL = "WWAS_AUDIO"
 WWAS_TEXT_PROTOCOL = "WWAS_TEXT"
 
 
-function readNuclear()
+function ReadNuclear()
     local input = false
-    while !input do
+    while not input do
         input = redstone.getInput("right")
     end
     
     if input then
-        sendAlarm("NUCLEAR EMERGENCY PLEASE STAY CALM")
+        SendAlarm("NUCLEAR EMERGENCY \nPLEASE STAY CALM")
     end
 end
 
-function testAlarm()
-    sendAlarm("THIS IS A WWAS TEST DO NOT PANIC")
+function TestAlarm()
+    SendAlarm("THIS IS A WWAS TEST \nDO NOT PANIC")
 end
 
-function powerLoss()
-    sendAlarm("BLACKOUT ON MAINGRID PLEASE STAY CALM")
+function PowerLoss()
+    SendAlarm("BLACKOUT ON MAINGRID \nPLEASE STAY CALM")
 end
 
 
-function sendAlarm(message)
+function SendAlarm(message)
     rednet.open("top")
     rednet.broadcast(true, WWAS_AUDIO_PROTOCOL)
     sleep(1)
     rednet.broadcast(message,WWAS_TEXT_PROTOCOL)
 end
 
-testAlarm()
+TestAlarm()

@@ -2,15 +2,15 @@ WWAS_AUDIO_PROTOCOL = "WWAS_AUDIO"
 WWAS_TEXT_PROTOCOL = "WWAS_TEXT"
 
 
-local function receiveAlarm()
+function ReceiveAlarm()
     rednet.open("front")
     local id ,message = rednet.receive(WWAS_AUDIO_PROTOCOL)
     local id ,text = rednet.receive(WWAS_TEXT_PROTOCOL)
-    displayAlarm(message,text)
+    DisplayAlarm(message,text)
 end
 
-local function displayAlarm(message,text)
-    local monitor = peripheral.wrap("right")
+function DisplayAlarm(message,text)
+    local monitor = peripheral.find("monitor")
     if message then
         redstone.setOutput("right",true)
         monitor.clear()
@@ -23,4 +23,4 @@ end
 
 
 
-receiveAlarm()
+ReceiveAlarm()
