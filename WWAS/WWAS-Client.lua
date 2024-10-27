@@ -1,11 +1,8 @@
 WWAS_AUDIO_PROTOCOL = "WWAS_AUDIO"
 WWAS_TEXT_PROTOCOL = "WWAS_TEXT"
 
-local function main()
-    recieveAlarm()
-end
 
-local function recieveAlarm()
+local function receiveAlarm()
     rednet.open("front")
     local id ,message = rednet.receive(WWAS_AUDIO_PROTOCOL)
     local id ,text = rednet.receive(WWAS_TEXT_PROTOCOL)
@@ -26,4 +23,4 @@ end
 
 
 
-main()
+receiveAlarm()
