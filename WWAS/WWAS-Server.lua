@@ -9,24 +9,26 @@ function ReadNuclear()
     end
     
     if input then
-        SendAlarm("NUCLEAR EMERGENCY \nPLEASE STAY CALM")
+        SendAlarm("NUCLEAR EMERGENCY", "PLEASE STAY CALM")
     end
 end
 
 function TestAlarm()
-    SendAlarm("THIS IS A WWAS TEST \nDO NOT PANIC")
+    SendAlarm("THIS IS A WWAS TEST", "DO NOT PANIC")
 end
 
 function PowerLoss()
-    SendAlarm("BLACKOUT ON MAINGRID \nPLEASE STAY CALM")
+    SendAlarm("BLACKOUT ON MAINGRID", "PLEASE STAY CALM")
 end
 
 
-function SendAlarm(message)
+function SendAlarm(text1, text2)
     rednet.open("top")
     rednet.broadcast(true, WWAS_AUDIO_PROTOCOL)
-    sleep(1)
-    rednet.broadcast(message,WWAS_TEXT_PROTOCOL)
+    sleep(0.5)
+    rednet.broadcast(text1, WWAS_TEXT_PROTOCOL)
+    sleep(0.5)
+    rednet.broadcast(text2, WWAS_TEXT_PROTOCOL)
 end
 
 TestAlarm()
