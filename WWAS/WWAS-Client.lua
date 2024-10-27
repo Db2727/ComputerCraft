@@ -17,11 +17,13 @@ function DisplayAlarm(message,text1)
         monitor.clear()
         monitor.setCursorPos(1,1)
         monitor.write(text1)
+        monitor.setCursorPos(1,2)
+        monitor.write(text2)
     end
 end
 
 
 
-
-
+local monitor = peripheral.find("monitor")
+monitor.clear()
 ReceiveAlarm()
