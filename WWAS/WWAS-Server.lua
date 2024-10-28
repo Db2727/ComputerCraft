@@ -25,13 +25,37 @@ function TestAlarm()
         input = redstone.getInput("front")
     end
     if input then
-        SendAlarm("speaker", "announce", "THIS IS A WWAS TEST", "DO NOT PANIC")
+        SendAlarm("siren", false, "THIS IS A WWAS TEST", "DO NOT PANIC")
     end
     Activate()
 end
 
 function PowerLoss()
     SendAlarm("siren", false, "BLACKOUT ON MAINGRID", "PLEASE STAY CALM")
+end
+
+function CustomAlert()
+    print("siren or speaker?")
+    local mode = read("> ")
+    term.clear()
+    if mode == "speaker" then
+        print("Sound Filename")
+        local sound = read("> ")
+        term.clear()
+    else
+        local sound = false
+    end
+    print("text1")
+    local text1 = read("> ")
+    term.clear()
+    print("text2")
+    local text2 = read("> ")
+    term.clear()
+
+    SendAlarm(mode,sound,text1,text2)
+    print("Alarm send")
+    read()
+    Activate()
 end
 
 
@@ -69,5 +93,9 @@ function Activate()
         PowerLoss()
     elseif MODE == "stop" then
         StopAlarm()
+    elseif MODE == "custom" then
+        CustomAlert()
     end
+    
+
 end
