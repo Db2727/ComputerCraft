@@ -1,7 +1,7 @@
 WWAS_AUDIO_PROTOCOL = "WWAS_AUDIO"
 WWAS_TEXT_PROTOCOL = "WWAS_TEXT"
 WWAS_STOP_PROTOCOL = "WWAS_STOP"
-Mode = ... --(test, nuclear, power, stop, custom)
+Mode,Custom_Mode,Sound_Name,text1,text2 = ... --(test, nuclear, power, stop, custom)
 
 
 
