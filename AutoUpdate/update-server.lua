@@ -6,6 +6,7 @@ SERVER_MANAGER_ID = 13
 function ReceiveRequest()
     rednet.open("top")
     local id,msg = rednet.receive(UPDATE_MANAGER_PROTOCOL)
+    rednet.send(SERVER_MANAGER_ID,true,UPDATE_MANAGER_PROTOCOL)
 
     if id == SERVER_MANAGER_ID then
         local client_id = tonumber(msg)
@@ -27,9 +28,9 @@ end
 function SendData(client_id,data)
     rednet.open("top")
     rednet.send(client_id, data, UPDATE_PROTOCOL)
-    rednet.send(SERVER_MANAGER_ID, true, UPDATE_MANAGER_PROTOCOL)
+    rednet.send(SERVER_MANAGER_ID, "active", UPDATE_MANAGER_PROTOCOL)
     ReceiveRequest()
 end
 
-rednet.send(SERVER_MANAGER_ID, true, UPDATE_MANAGER_PROTOCOL)
+rednet.send(SERVER_MANAGER_ID, "active", UPDATE_MANAGER_PROTOCOL)
 ReceiveRequest()
