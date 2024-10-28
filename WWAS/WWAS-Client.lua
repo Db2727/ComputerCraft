@@ -11,7 +11,7 @@ function ReceiveAlarm()
     monitor.write(WWAS_ID)
     monitor.setCursorPos(1,1)
 
-    rednet.open("front")
+    rednet.open("back")
     local id, message = rednet.receive(WWAS_AUDIO_PROTOCOL)
     if not message then
         if message == WWAS_ID then
@@ -36,7 +36,7 @@ function DisplayAlarm(message,mode,sound,text1,text2)
     local monitor = peripheral.find("monitor")
     if message then
         if mode == "siren" then
-            redstone.setOutput("right",true)
+            redstone.setOutput("top",true)
         elseif mode == "speaker" then
             local speaker = peripheral.find("speaker")
             PlaySoundFile(sound)
@@ -57,7 +57,7 @@ function StopAlarm()
     local monitor = peripheral.find("monitor")
     local id, message = rednet.receive(WWAS_STOP_PROTOCOL)
     if message then
-        redstone.setOutput("right",false)
+        redstone.setOutput("top",false)
         monitor.clear()
         monitor.setCursorPos(1,1)
         ReceiveAlarm()
