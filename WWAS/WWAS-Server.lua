@@ -36,20 +36,20 @@ end
 
 function CustomAlert()
     print("siren or speaker?")
-    local mode = read("> ")
+    local mode = read("")
     term.clear()
     if mode == "speaker" then
         print("Sound Filename")
-        local sound = read("> ")
+        local sound = read("")
         term.clear()
     else
         local sound = false
     end
     print("text1")
-    local text1 = read("> ")
+    local text1 = read("")
     term.clear()
     print("text2")
-    local text2 = read("> ")
+    local text2 = read("")
     term.clear()
 
     SendAlarm(mode,sound,text1,text2)
@@ -96,6 +96,4 @@ function Activate()
     elseif MODE == "custom" then
         CustomAlert()
     end
-    
-
 end
