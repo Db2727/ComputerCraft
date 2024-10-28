@@ -53,7 +53,7 @@ function DisplayAlarm(message,mode,sound,text1,text2)
 end
 
 function StopAlarm()
-    rednet.open("front")
+    rednet.open("back")
     local monitor = peripheral.find("monitor")
     local id, message = rednet.receive(WWAS_STOP_PROTOCOL)
     if message then
