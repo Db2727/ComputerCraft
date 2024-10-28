@@ -19,6 +19,7 @@ function RequestFile(filepath,name)
     rednet.open("back")
     rednet.send(SERVER_MANAGER_ID,name,UPDATE_MANAGER_PROTOCOL)
     local id,data = rednet.receive(UPDATE_PROTOCOL)
+    UpdateFile(filepath,name,data)
 end
 
 function UpdateFile(filepath,name,data)
