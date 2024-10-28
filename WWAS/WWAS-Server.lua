@@ -1,7 +1,7 @@
 WWAS_AUDIO_PROTOCOL = "WWAS_AUDIO"
 WWAS_TEXT_PROTOCOL = "WWAS_TEXT"
 WWAS_STOP_PROTOCOL = "WWAS_STOP"
-MODE = "test" --(test, nuclear, power, stop, custom)
+Mode = ... --(test, nuclear, power, stop, custom)
 
 
 
@@ -85,15 +85,17 @@ function StopAlarm()
 end
 
 function Activate()
-    if MODE == "test" then
+    if Mode == "test" then
         TestAlarm()
-    elseif MODE == "nuclear" then
+    elseif Mode == "nuclear" then
         ReadNuclear()
-    elseif MODE == "power" then
+    elseif Mode == "power" then
         PowerLoss()
-    elseif MODE == "stop" then
+    elseif Mode == "stop" then
         StopAlarm()
-    elseif MODE == "custom" then
+    elseif Mode == "custom" then
         CustomAlert()
+    else
+        printError("Invalid Mode")
     end
 end
