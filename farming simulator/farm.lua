@@ -1,10 +1,9 @@
-LENGHT = 3
+LENGHT = 30
 WIDTH = 4
 
 Current_Cycle = 0
 
 function StartCycle()
-    
     for i = 1, WIDTH, 1 do
         Current_Cycle = Current_Cycle + 1
         MineLane()

@@ -1,0 +1,1 @@
+local BANNED_PLAYERS = {"Db_27YT"}

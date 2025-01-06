@@ -16,7 +16,7 @@ local function getItemList()
     input = tonumber(read()) 
     
 
-    print("Input amount max 64:")
+    print("Input amount (max 64:)")
     local count = tonumber(read())
     GetItem(found[input],count)
 end
